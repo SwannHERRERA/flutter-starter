@@ -1,1 +1,1 @@
-class Environment {}
+abstract class Environment {}

@@ -1,4 +1,4 @@
-# flutter_starter
+# flutter_auth
 
 A new Flutter project.
 

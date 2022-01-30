@@ -1,1 +1,49 @@
-[{"description":"","id":"calculator","keyword":"Feature","line":1,"name":"Calculator","uri":"/Users/swannherrera/repos/github.com/flutter-starter/test/features/add_two_numbers.feature","elements":[{"keyword":"Scenario","type":"scenario","id":"calculator;add two numbers","name":"Add two numbers","description":"","line":4,"steps":[{"keyword":"Given ","name":"the numbers 1.5 and 2.1","line":5,"match":{"location":"/Users/swannherrera/repos/github.com/flutter-starter/test/features/add_two_numbers.feature:5"},"result":{"status":"passed","duration":9000000}},{"keyword":"When ","name":"they are added","line":6,"match":{"location":"/Users/swannherrera/repos/github.com/flutter-starter/test/features/add_two_numbers.feature:6"},"result":{"status":"passed","duration":2000000}},{"keyword":"Then ","name":"the expected result should be 3.6","line":7,"match":{"location":"/Users/swannherrera/repos/github.com/flutter-starter/test/features/add_two_numbers.feature:7"},"result":{"status":"passed","duration":2000000}}]}]}]
+[
+  {
+    "description": "",
+    "id": "calculator",
+    "keyword": "Feature",
+    "line": 1,
+    "name": "Calculator",
+    "uri": "/Users/swannherrera/repos/github.com/flutter-auth/test/features/add_two_numbers.feature",
+    "elements": [
+      {
+        "keyword": "Scenario",
+        "type": "scenario",
+        "id": "calculator;add two numbers",
+        "name": "Add two numbers",
+        "description": "",
+        "line": 4,
+        "steps": [
+          {
+            "keyword": "Given ",
+            "name": "the numbers 1.5 and 2.1",
+            "line": 5,
+            "match": {
+              "location": "/Users/swannherrera/repos/github.com/flutter-auth/test/features/add_two_numbers.feature:5"
+            },
+            "result": { "status": "passed", "duration": 9000000 }
+          },
+          {
+            "keyword": "When ",
+            "name": "they are added",
+            "line": 6,
+            "match": {
+              "location": "/Users/swannherrera/repos/github.com/flutter-auth/test/features/add_two_numbers.feature:6"
+            },
+            "result": { "status": "passed", "duration": 2000000 }
+          },
+          {
+            "keyword": "Then ",
+            "name": "the expected result should be 3.6",
+            "line": 7,
+            "match": {
+              "location": "/Users/swannherrera/repos/github.com/flutter-auth/test/features/add_two_numbers.feature:7"
+            },
+            "result": { "status": "passed", "duration": 2000000 }
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -5,16 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
-  final increseSnackbar = const SnackBar(
-    backgroundColor: Colors.yellow,
-    content: Text('Increase'),
-    duration: Duration(milliseconds: 100),
-  );
-  final descreaseSnackbar = const SnackBar(
-    backgroundColor: Colors.cyan,
-    content: Text('descrase'),
-    duration: Duration(milliseconds: 100),
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -38,15 +28,29 @@ class Home extends StatelessWidget {
               ),
               BlocConsumer<CounterCubit, CounterState>(
                 listener: (context, state) {
-                  if (state.value > 0) {
-                    ScaffoldMessenger.of(context).showSnackBar(increseSnackbar);
+                  if (state.isIncreasing) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('incremented !'),
+                      duration: Duration(milliseconds: 300),
+                      backgroundColor: Colors.blueGrey,
+                    ));
                   } else {
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(descreaseSnackbar);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Decremented!'),
+                        duration: Duration(milliseconds: 300),
+                      ),
+                    );
                   }
                 },
                 builder: (context, state) {
-                  return Text(state.value.toString());
+                  return Text(
+                    state.value.toString(),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline3
+                        ?.copyWith(color: Colors.deepPurple),
+                  );
                 },
               ),
               IconButton(

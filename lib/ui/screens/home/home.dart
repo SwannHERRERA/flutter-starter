@@ -1,68 +1,95 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/config/colors.dart';
-import 'package:flutter_auth/states/cubit/counter_cubit.dart';
+import 'package:flutter_auth/states/loginform/login_form_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  Home({Key? key}) : super(key: key);
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          width: 300,
-          height: 100,
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-            border: Border.all(color: AppColors.lightBlue, width: 2.0),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                onPressed: () {
-                  BlocProvider.of<CounterCubit>(context).decrease();
-                },
-                icon: const Icon(Icons.arrow_left),
+        child: BlocProvider(
+          create: (context) => LoginFormBloc(),
+          child: Form(
+            key: _formKey,
+            child: Container(
+              padding: const EdgeInsets.only(
+                  left: 20.0, right: 20.0, bottom: 15.0, top: 80),
+              child: Padding(
+                padding: const EdgeInsets.all(40),
+                child: Column(
+                  children: [
+                    _usernameField(),
+                    _passwordField(),
+                    _submitButton(),
+                  ],
+                ),
               ),
-              BlocConsumer<CounterCubit, CounterState>(
-                listener: (context, state) {
-                  if (state.isIncreasing) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text('incremented !'),
-                      duration: Duration(milliseconds: 300),
-                      backgroundColor: Colors.blueGrey,
-                    ));
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Decremented!'),
-                        duration: Duration(milliseconds: 300),
-                      ),
-                    );
-                  }
-                },
-                builder: (context, state) {
-                  return Text(
-                    state.value.toString(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline3
-                        ?.copyWith(color: Colors.deepPurple),
-                  );
-                },
-              ),
-              IconButton(
-                onPressed: () {
-                  BlocProvider.of<CounterCubit>(context).increment();
-                },
-                icon: const Icon(Icons.arrow_right),
-              ),
-            ],
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _usernameField() {
+    return BlocBuilder<LoginFormBloc, LoginFormState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: TextFormField(
+            decoration: const InputDecoration(hintText: "Username"),
+            validator: RequiredValidator(errorText: "Username is required"),
+            onChanged: (value) => context
+                .read<LoginFormBloc>()
+                .add(LoginFormUpdateUsername(username: value)),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _passwordField() {
+    return BlocBuilder<LoginFormBloc, LoginFormState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 8.0),
+          child: TextFormField(
+            decoration: const InputDecoration(hintText: "Password"),
+            validator: RequiredValidator(errorText: "Password is required"),
+            obscureText: true,
+            onChanged: (value) => {
+              context
+                  .read<LoginFormBloc>()
+                  .add(LoginFormUpdatePassword(password: value)),
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _submitButton() {
+    return BlocBuilder<LoginFormBloc, LoginFormState>(
+      builder: (context, state) {
+        return ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.cyan,
+            onPrimary: Colors.black87,
+            textStyle: const TextStyle(
+              fontSize: 17,
+            ),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 15.0, vertical: 7.0),
+          ),
+          onPressed: () =>
+              context.read<LoginFormBloc>().add(LoginFormSubmitted()),
+          child: const Text('Login'),
+        );
+      },
     );
   }
 }

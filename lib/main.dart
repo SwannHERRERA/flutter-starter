@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_auth/states/cubit/counter_cubit.dart';
+import 'package:flutter_auth/states/auth/auth_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import './ui/screens/home/home.dart';
 
@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: BlocProvider(
-        create: (context) => CounterCubit(),
-        child: const Home(),
+        create: (context) => AuthBloc(),
+        child: Home(),
       ),
     );
   }
